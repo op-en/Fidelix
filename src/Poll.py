@@ -12,13 +12,15 @@ config = {
     'fidelix_password': os.environ.get('FIDELIX_PASSWORD','pass'),
     'mqtt_host': os.environ.get('MQTT','192.168.99.100'),
     'mqtt_topic_stem': os.environ.get('MQTT_TOPIC','/fidelix/'),
-    'verbose': (os.environ.get('VERBOSE','True') == 'True')
+    'verbose': (os.environ.get('VERBOSE','True') == 'True'),
+    'request_timeout': int(os.environ.get('REQUEST_TIMEOUT',5000))
 }
 
 sched = BlockingScheduler()
 print('type=info msg="polling scheduled" interval=%s verbose=%s' % (str(config['interval']), config['verbose'] ))
 
 service = Fidelix()
+service.timeout = config['request_timeout']
 service.host = config['mqtt_host']
 service.stem = config['mqtt_topic_stem']
 service.verbose = config['verbose']

@@ -18,6 +18,7 @@ ENV FIDELIX_USER user
 ENV FIDELIX_PASSWORD pass
 ENV MQTT 192.168.99.100
 ENV VERBOSE False
+ENV REQUEST_TIMEOUT 5000
 
 # Go go go!
 CMD ["python","-u","/opt/fidelix/Poll.py"]
